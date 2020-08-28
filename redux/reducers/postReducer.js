@@ -10,8 +10,9 @@ FORBIDDEN in Reducers:
 */
 
 import * as types from '../actions/actionTypes';
+import initialState from './initialState';
 
-function postReducer(state, action) {
+function postReducer(state = initialState, action) {
     switch (action.type) {
         case types.LIST_POSTS:
             return { ...state };

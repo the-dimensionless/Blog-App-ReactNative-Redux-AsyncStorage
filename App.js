@@ -8,14 +8,13 @@ import HomeScreen from './views/HomeScreen';
 import EditPostScreen from './components/EditPostScreen';
 
 import { Provider } from 'react-redux';
-import configureStore from './redux/configureStore';
+import store from './redux/configureStore';
 
 const Stack = createStackNavigator();
-const store = configureStore();
 
 export default function App() {
   return (
-    <Provider store={store}>
+    <Provider store={store()}>
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen

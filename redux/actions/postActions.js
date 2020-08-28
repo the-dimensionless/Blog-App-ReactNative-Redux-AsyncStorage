@@ -2,15 +2,12 @@ import * as types from './actionTypes';
 import Data from '../../assets/data/data.json';
 
 export function loadPosts() {
-    return function (dispatch) {
-        dispatch(loadPostsSuccess(Data.posts));
-    }
-}
-
-export function loadPostsSuccess(posts) {
-    return {
-        type: types.LIST_POSTS,
-        posts: posts
+    console.log('called');
+    return dispatch => {
+        return dispatch({
+            type: types.LIST_POSTS,
+            posts: posts
+        });
     }
 };
 

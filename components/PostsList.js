@@ -1,16 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 
 import Post from './Post';
 
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import { loadPosts } from '../redux/actions/postActions';
+import { ScrollView } from 'react-native-gesture-handler';
+
 const PostsList = (props) => {
+    /* useEffect(() => {
+        console.log(props.posts);
+    }, []); */
     const posts = props.posts.map(post => {
-        <Post post={post} />
+        return <Post post={post} key={post.id} />
+
     })
     return (
-        <View>
-
-        </View>
+        <ScrollView>
+            <View>
+                {posts}
+            </View>
+        </ScrollView>
     );
 };
 
@@ -31,4 +43,11 @@ const styles = StyleSheet.create({
 
 });
 
-export default PostsList;
+function mapStateToProps(state) {
+    return {
+        posts: state.postReducer.posts,
+    };
+}
+
+
+export default connect(mapStateToProps, { loadPosts })(PostsList);
