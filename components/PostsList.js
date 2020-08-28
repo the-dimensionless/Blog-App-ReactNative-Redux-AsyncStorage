@@ -18,8 +18,8 @@ const PostsList = (props) => {
 
     })
     return (
-        <ScrollView>
-            <View>
+        <ScrollView style={styles.container}>
+            <View >
                 {posts}
             </View>
         </ScrollView>
@@ -40,7 +40,8 @@ var your_array = [
 your_array.sort(custom_sort);
 
 const styles = StyleSheet.create({
-
+    conatiner: {
+    }
 });
 
 function mapStateToProps(state) {

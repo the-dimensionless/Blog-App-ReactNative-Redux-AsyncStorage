@@ -5,13 +5,13 @@ import PostsList from '../components/PostsList';
 const HomeScreen = (props) => {
     return (
         <View>
-            <Text>Welcome to Home Page. Here is a list of all json data</Text>
-            <PostsList />
+            <PostsList props={props} />
         </View>
     );
 };
 
 const styles = StyleSheet.create({
+
 
 });
 
