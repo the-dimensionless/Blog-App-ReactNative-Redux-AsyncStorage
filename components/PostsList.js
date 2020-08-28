@@ -1,13 +1,20 @@
 import React from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
 
-const PostsList = () => {
+import Post from './Post';
+
+const PostsList = (props) => {
+    const posts = props.posts.map(post => {
+        <Post post={post} />
+    })
     return (
         <View>
 
         </View>
     );
 };
+
+
 
 function custom_sort(a, b) {
     return new Date(a.lastUpdated).getTime() - new Date(b.lastUpdated).getTime();
@@ -19,5 +26,9 @@ var your_array = [
 ];
 
 your_array.sort(custom_sort);
+
+const styles = StyleSheet.create({
+
+});
 
 export default PostsList;
