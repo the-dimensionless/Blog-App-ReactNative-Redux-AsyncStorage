@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const HomeScreen = () => {
+const HomeScreen = (props) => {
     return (
         <View>
             <Text>Welcome to Home Page. Here is a list of all json data</Text>
