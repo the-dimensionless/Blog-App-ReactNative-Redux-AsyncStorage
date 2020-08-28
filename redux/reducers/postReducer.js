@@ -21,11 +21,33 @@ function postReducer(state, action) {
                 posts: state.posts.concat(action.payload)
             };
         case types.EDIT_POST:
-            return state;
+            return {
+                ...state,
+                posts: state.posts.map(
+                    (content, i) => content.id === action.payload.id ? {
+                        ...content,
+                        title: action.payload.title,
+                        slug: action.payload.slug,
+                        authorId: action.payload.authorId,
+                        date: action.payload.date
+                    } : content)
+            };
         case types.DELETE_POST:
-            return state;
+            return {
+                ...state,
+                posts: state.posts.filter(post => post.id !== action.payload)
+            };
         case types.LIKE_POSTS:
-            return state;
+            return {
+                ...state,
+                posts: state.map(
+                    (content, i) => content.id === action.payload.id ?
+                        {
+                            ...content,
+                            likes: likes + 1
+                        } : content
+                )
+            };
         default:
             return state;
     }

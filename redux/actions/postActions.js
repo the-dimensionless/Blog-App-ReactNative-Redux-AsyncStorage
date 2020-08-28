@@ -15,23 +15,29 @@ export function loadPostsSuccess(posts) {
 };
 
 export function createPost(post) {
-    return {
-        type: types.CREATE_POST,
-        post: post
-    };
-}
+    return dispatch => {
+        return dispatch({
+            type: types.CREATE_POST,
+            payload: post
+        });
+    }
+};
 
 export function editPost(post) {
-    return {
-        type: types.EDIT_POST,
-        post: post,
+    return dispatch => {
+        return dispatch({
+            type: types.EDIT_POST,
+            payload: post,
+        });
     }
 };
 
 export function deletePost(postId) {
-    return {
-        type: types.DELETE_POST,
-        postId: postId
+    return dispatch => {
+        return dispatch({
+            type: types.DELETE_POST,
+            payload: postId
+        });
     }
 };
 
