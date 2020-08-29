@@ -46,8 +46,8 @@ const styles = StyleSheet.create({
     },
     container2: {
         flex: 1,
-        /*  flexDirection: "row",
-         flexWrap: "wrap" */
+        flexDirection: "row",
+        flexWrap: "wrap"
     }
 });
 

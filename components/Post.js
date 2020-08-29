@@ -27,23 +27,28 @@ const Post = ({ navigation, post }) => {
 const styles = StyleSheet.create({
     card: {
         padding: 5,
-        flex: 1,
+        //flex: 1,
+        width: '50%',
+        /*  alignSelf: 'stretch',
+         //justifyContent: 'center',
+         alignContent: 'stretch' */
     },
 
     container: {
-        paddingTop: 10,
-        paddingBottom: 10,
+        padding: 16,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         borderColor: 'yellow',
         backgroundColor: '#90ee90',
         shadowOpacity: 25,
         borderRadius: 13,
-        height: 130,
+        height: '50%',
+
+
     },
 
     title: {
-        padding: 6,
+        paddingTop: 26,
         fontSize: 21,
         fontWeight: "bold",
         textAlign: 'center'
@@ -52,13 +57,14 @@ const styles = StyleSheet.create({
     slug: {
         paddingTop: 3,
         fontSize: 15,
-        paddingBottom: 3
+        paddingBottom: 3,
+        textAlign: 'center'
     },
 
     date: {
-        paddingTop: 7,
-        color: 'white',
-        alignContent: 'flex-end'
+        paddingTop: 3,
+        color: 'grey',
+        alignContent: 'flex-end',
     }
 
 });
