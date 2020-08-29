@@ -22,6 +22,7 @@ function postReducer(state = initialState, action) {
                 posts: state.posts.concat(action.payload)
             };
         case types.EDIT_POST:
+            console.log('I am going to reduce it')
             return {
                 ...state,
                 posts: state.posts.map(
@@ -29,6 +30,7 @@ function postReducer(state = initialState, action) {
                         ...content,
                         title: action.payload.title,
                         slug: action.payload.slug,
+
                         authorId: action.payload.authorId,
                         date: action.payload.date
                     } : content)

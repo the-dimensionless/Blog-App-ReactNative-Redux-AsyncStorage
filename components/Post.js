@@ -2,17 +2,18 @@ import React from 'react';
 
 import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 
-
-let isPressed = false;
-const Post = ({ post }) => {
+const Post = ({ navigation, post }) => {
+    let isPressed = false;
     return (
         <View style={styles.card}>
 
-
-
             <View style={styles.container}>
 
-                <Text style={styles.title}>{post.title}</Text>
+                <Text style={styles.title} onPress={() => {
+                    console.log('Code reached here id ', post)
+                    navigation.navigate('edit', post);
+                }}
+                >{post.title}</Text>
 
                 <Text style={styles.slug}>{post.slug}</Text>
 
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#90ee90',
         shadowOpacity: 25,
         borderRadius: 23,
-        height: isPressed ? 200 : 130,
+        height: 130,
     },
 
     title: {

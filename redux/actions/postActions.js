@@ -22,6 +22,7 @@ export function createPost(post) {
 
 export function editPost(post) {
     return dispatch => {
+        console.log('I have revceived data', post.id)
         return dispatch({
             type: types.EDIT_POST,
             payload: post,

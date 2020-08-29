@@ -6,15 +6,16 @@ import Post from './Post';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { loadPosts } from '../redux/actions/postActions';
+import { loadPosts, editPost, deletePost } from '../redux/actions/postActions';
 import { ScrollView } from 'react-native-gesture-handler';
 
 const PostsList = (props) => {
     /* useEffect(() => {
         console.log(props.posts);
     }, []); */
+
     const posts = props.posts.map(post => {
-        return <Post post={post} key={post.id} />
+        return <Post post={post} navigation={props.props.navigation} key={post.id} />
 
     })
     return (
@@ -51,4 +52,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps, { loadPosts })(PostsList);
+export default connect(mapStateToProps, { loadPosts, editPost, deletePost })(PostsList);
