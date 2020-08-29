@@ -20,7 +20,7 @@ const PostsList = (props) => {
     })
     return (
         <ScrollView style={styles.container}>
-            <View >
+            <View style={styles.container2}>
                 {posts}
             </View>
         </ScrollView>
@@ -41,7 +41,13 @@ var your_array = [
 your_array.sort(custom_sort);
 
 const styles = StyleSheet.create({
-    conatiner: {
+    container: {
+        marginBottom: 50,
+    },
+    container2: {
+        flex: 1,
+        /*  flexDirection: "row",
+         flexWrap: "wrap" */
     }
 });
 

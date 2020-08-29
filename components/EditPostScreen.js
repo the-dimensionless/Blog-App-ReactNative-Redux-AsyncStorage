@@ -58,14 +58,14 @@ const EditPostScreen = (props) => {
         <>
             <View style={styles.card}>
                 <View style={styles.container}>
-                    <TextInput style={styles.title} value={title} editable={canEdit} onChangeText={
+                    <TextInput multiline={true} style={styles.title} value={title} editable={canEdit} onChangeText={
                         (text) => setTitle(text)
                     } />
 
                     <TextInput style={styles.slug} defaultValue={slug} editable={canEdit} onChangeText={
                         (text) => setSlug(text)} />
 
-                    <TextInput style={styles.body} defaultValue='Here will be Body' editable={canEdit} onChangeText={
+                    <TextInput multiline={true} style={styles.body} defaultValue='Here will be Body AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' editable={canEdit} onChangeText={
                         (text) => setBody(text)
                     } />
 
@@ -140,6 +140,7 @@ const styles = StyleSheet.create({
     },
 
     body: {
+        padding: 12
 
     },
 
@@ -161,13 +162,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { editPost, deletePost })(EditPostScreen);
-
-/*  <Image
-                style={styles.edit}
-                source={require('../assets/edit.png')}
-            />
-
-            <Image
-                style={styles.delete}
-                source={require('../assets/delete.png')}
-            /> */

@@ -4,7 +4,7 @@ import PostsList from '../components/PostsList';
 
 const HomeScreen = (props) => {
     return (
-        <View>
+        <View styles={styles.container}>
             <Button title='Create Post' onPress={() => {
                 props.navigation.navigate('add');
             }} />
@@ -14,8 +14,9 @@ const HomeScreen = (props) => {
 };
 
 const styles = StyleSheet.create({
-
-
+    container: {
+        flex: 1
+    }
 });
 
 export default HomeScreen;

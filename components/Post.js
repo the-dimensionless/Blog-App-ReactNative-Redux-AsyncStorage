@@ -38,12 +38,12 @@ const styles = StyleSheet.create({
         borderColor: 'yellow',
         backgroundColor: '#90ee90',
         shadowOpacity: 25,
-        borderRadius: 23,
+        borderRadius: 13,
         height: 130,
     },
 
     title: {
-        padding: 3,
+        padding: 6,
         fontSize: 21,
         fontWeight: "bold",
         textAlign: 'center'
