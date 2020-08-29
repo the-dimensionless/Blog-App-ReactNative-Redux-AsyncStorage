@@ -9,18 +9,18 @@ const EditPostScreen = (props) => {
     //let local = props.posts[0];
     let local = props.route.params
     useEffect(() => {
-        console.log(props);
+        /* console.log(props); */
         local = props.route.params
-        console.log('Id of post recievd', local.id);
+        /* console.log('Id of post recievd', local.id); */
 
     }, []);
 
     let [canEdit, setCanEdit] = useState(true);
 
-    const [title, setTitle] = useState('');
-    const [slug, setSlug] = useState('');
+    const [title, setTitle] = useState(local.title);
+    const [slug, setSlug] = useState(local.slug);
     const [body, setBody] = useState('');
-    const [date, setDate] = useState('');
+    const [date, setDate] = useState(local.date);
 
     const [likes, setLikes] = useState('');
 
@@ -34,16 +34,17 @@ const EditPostScreen = (props) => {
     function update() {
         let p = {
             id: local.id,
-            title: local.title,
-            slug: local.slug,
+            title: title,
+            slug: slug,
             body: local.bug,
             date: new Date().toDateString(),
             authorId: local.authorId
         }
 
+        console.log('New value for slug is ', p.slug);
         props.editPost(p);
+        console.log('Sent for updation');
         props.navigation.navigate('Home');
-
     }
 
     function doDelete() {
@@ -57,18 +58,18 @@ const EditPostScreen = (props) => {
         <>
             <View style={styles.card}>
                 <View style={styles.container}>
-                    <TextInput style={styles.title} defaultValue={local.title} editable={canEdit} onChangeText={
+                    <TextInput style={styles.title} value={title} editable={canEdit} onChangeText={
                         (text) => setTitle(text)
                     } />
 
-                    <TextInput style={styles.slug} defaultValue={local.slug} editable={canEdit} onChangeText={
+                    <TextInput style={styles.slug} defaultValue={slug} editable={canEdit} onChangeText={
                         (text) => setSlug(text)} />
 
                     <TextInput style={styles.body} defaultValue='Here will be Body' editable={canEdit} onChangeText={
                         (text) => setBody(text)
                     } />
 
-                    <Text style={styles.date} >{local.date}</Text>
+                    <Text style={styles.date} >{date}</Text>
                 </View>
             </View>
 

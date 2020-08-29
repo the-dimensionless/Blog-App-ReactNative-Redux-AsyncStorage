@@ -10,7 +10,7 @@ const Post = ({ navigation, post }) => {
             <View style={styles.container}>
 
                 <Text style={styles.title} onPress={() => {
-                    console.log('Code reached here id ', post)
+                    /* console.log('Code reached here id ', post) */
                     navigation.navigate('edit', post);
                 }}
                 >{post.title}</Text>
