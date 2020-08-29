@@ -17,12 +17,12 @@ function postReducer(state = initialState, action) {
         case types.LIST_POSTS:
             return { ...state };
         case types.CREATE_POST:
+            console.log('I am going to reduce it');
             return {
                 ...state,
                 posts: state.posts.concat(action.payload)
             };
         case types.EDIT_POST:
-            console.log('I am going to reduce it')
             return {
                 ...state,
                 posts: state.posts.map(

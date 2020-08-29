@@ -6,6 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import HomeScreen from './views/HomeScreen';
 import EditPostScreen from './components/EditPostScreen';
+import AddPostScreen from './components/AddPostScreen';
 
 import { Provider } from 'react-redux';
 import store from './redux/configureStore';
@@ -23,6 +24,7 @@ export default function App() {
             options={{ title: 'Welcome' }}
           />
           <Stack.Screen name="edit" component={EditPostScreen} />
+          <Stack.Screen name="add" component={AddPostScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

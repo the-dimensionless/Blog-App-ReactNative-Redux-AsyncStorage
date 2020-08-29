@@ -13,6 +13,7 @@ export function loadPosts() {
 
 export function createPost(post) {
     return dispatch => {
+        console.log('I have revceived data', post.title);
         return dispatch({
             type: types.CREATE_POST,
             payload: post
@@ -22,7 +23,7 @@ export function createPost(post) {
 
 export function editPost(post) {
     return dispatch => {
-        console.log('I have revceived data', post.id)
+
         return dispatch({
             type: types.EDIT_POST,
             payload: post,
