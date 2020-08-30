@@ -73,19 +73,29 @@ const EditPostScreen = (props) => {
                 </View>
             </View>
 
-            <View style={styles.card}>
+            <View style={styles.actionCard}>
                 <View style={styles.actions} >
-                    {canEdit && view && <Button title='Edit' onPress={() => readyToEdit()} />}
+                    <View style={styles.button}>
+                        <Image
+                            style={styles.image}
+                            source={require('../assets/like.png')}
+                        />
+                        <Text title='5' style={styles.likes} />
+                    </View>
 
-                    {canEdit && !view && <Button title='Update' onPress={() => update()} />}
+                    <View style={styles.button}>
+                        {canEdit && view && <Button title='Edit' onPress={() => readyToEdit()} />}
+                    </View>
 
-                    {canEdit && view && <Button title='Delete' onPress={() => doDelete()} />}
+                    <View style={styles.button}>
+                        {canEdit && !view && <Button title='Update' onPress={() => update()} />}
+                    </View>
+
+                    <View style={styles.button}>
+                        {canEdit && view && <Button title='Delete' onPress={() => doDelete()} />}
+                    </View>
                 </View>
-                <Image
-                    style={styles.image}
-                    source={require('../assets/like.png')}
-                />
-                <Text title='5' style={styles.likes} />
+
 
             </View>
         </>
@@ -137,6 +147,7 @@ const styles = StyleSheet.create({
     image: {
         width: 50,
         height: 50,
+        marginLeft: 8
     },
 
     body: {
@@ -145,7 +156,17 @@ const styles = StyleSheet.create({
     },
 
     actions: {
-        position: "relative"
+        flexDirection: "row",
+    },
+    actionCard: {
+        flex: 1,
+        alignContent: "stretch",
+        //justifyContent: "stretch"
+    },
+    button: {
+        width: '20%',
+        padding: 5,
+        marginLeft: 4
     }
 
 
