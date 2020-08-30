@@ -7,12 +7,14 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './views/HomeScreen';
 import EditPostScreen from './components/EditPostScreen';
 import AddPostScreen from './components/AddPostScreen';
+import Logout from './components/Logout';
 
 import LoginScreen from './components/LoginScreen';
 import RegisterScreen from './components/RegisterScreen';
 
 import { Provider } from 'react-redux';
-import store from './redux/configureStore';
+import createStore from './redux/configureStore';
+import initialState from './redux/reducers/initialState';
 
 import appContext from './components/context/appContext';
 
@@ -76,11 +78,14 @@ export default function App() {
       <authStack.Screen name="edit" component={EditPostScreen} options={{
         title: 'Edit Post'
       }} />
+      <authStack.Screen name="logout" component={Logout} options={{
+        title: 'Logout'
+      }} />
     </authStack.Navigator >
   )
 
   return (
-    <Provider store={store()}>
+    <Provider store={createStore()}>
       <appContext.Provider value={isLoggedIn, toggleLogin}>
         <NavigationContainer>
           <AuthStack />

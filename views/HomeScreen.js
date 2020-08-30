@@ -15,7 +15,7 @@ const HomeScreen = (props) => {
 
                     <View style={styles.children}>
                         <Button title=' Logout' onPress={() => {
-                            props.navigation.navigate('add');
+                            props.navigation.navigate('logout');
                         }} />
                     </View>
                 </View>
