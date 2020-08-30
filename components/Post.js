@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
         /*  alignSelf: 'stretch',
          //justifyContent: 'center',
          alignContent: 'stretch' */
+
     },
 
     container: {
