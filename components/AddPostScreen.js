@@ -52,7 +52,7 @@ const AddPostScreen = (props) => {
                 <TextInput style={styles.textInput} placeholder="Enter Slug" onChangeText={(text) => setPostSlug(text)}
                     underlineColorAndroid={'transparent'} />
 
-                <TextInput style={styles.textBody} placeholder="Enter Body" onChangeText={(text) => setPostBody(text)}
+                <TextInput style={styles.textBody} multiline={true} numberOfLines={10} placeholder="Enter Body" onChangeText={(text) => setPostBody(text)}
                     underlineColorAndroid={'transparent'} />
 
                 <TouchableOpacity style={styles.button} onPress={() => submitForm()}>
@@ -98,7 +98,8 @@ const styles = StyleSheet.create({
         marginBottom: 30,
         color: '#fff',
         borderBottomColor: '#f8f8f8',
-        borderBottomWidth: 1
+        borderBottomWidth: 1,
+        borderColor: '#f8f8f8'
     },
     button: {
         alignSelf: 'stretch',
