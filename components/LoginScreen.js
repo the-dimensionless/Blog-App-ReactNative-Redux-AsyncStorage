@@ -147,7 +147,7 @@ const LoginScreen = (props) => {
                                 onChangeText={UserEmail => setUserEmail(UserEmail)}
                                 //underlineColorAndroid="blue"
                                 placeholder="Enter email" //dummy@abc.com
-                                placeholderTextColor="#F6F6F7"
+                                placeholderTextColor="#00203FFF"
                                 autoCapitalize="none"
                                 keyboardType="email-address"
                                 ref={_emailinput}
@@ -164,7 +164,7 @@ const LoginScreen = (props) => {
                                 onChangeText={UserPassword => setUserPassword(UserPassword)}
                                 //underlineColorAndroid="blue"
                                 placeholder="Enter Password" //12345
-                                placeholderTextColor="#F6F6F7"
+                                placeholderTextColor="#00203FFF"
                                 keyboardType="default"
                                 ref={_passwordinput}
                                 onSubmitEditing={Keyboard.dismiss}
