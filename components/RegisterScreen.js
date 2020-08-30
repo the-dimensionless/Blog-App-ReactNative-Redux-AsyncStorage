@@ -7,7 +7,6 @@ import {
 import Loader from './Loader';
 
 const RegisterScreen = props => {
-    let [userName, setUserName] = useState('');
     let [userEmail, setUserEmail] = useState('');
     let [userPassword, setUserPassword] = useState('');
 
@@ -16,10 +15,6 @@ const RegisterScreen = props => {
 
     const handleSubmitButton = async () => {
         setErrortext('');
-        /* if (!userName) {
-            alert('Please fill Name');
-            return;
-        } */
         if (!userEmail) {
             alert('Please fill Email');
             return;
@@ -31,11 +26,9 @@ const RegisterScreen = props => {
         //Show Loader
         setLoading(true);
         let listOfUsers = AsyncStorage.getItem('listOfUsers').then((list) => {
-            console.log('LIST OF USERS = ', list)
             let l = []
             if (list) {
                 l = JSON.parse(list)
-                console.log('parsed list of users is here ', l)
                 l.push({
                     email: userEmail,
                     password: userPassword,
@@ -48,19 +41,17 @@ const RegisterScreen = props => {
                     id: 1
                 })
             }
-
-            console.log('Updated list is ', l)
+            //console.log('Updated list is ', l)
             AsyncStorage.setItem('listOfUsers', JSON.stringify(l));
-        }).catch((err) => console.log('error occurred during list Of Users', err))
 
-
-        let res = await AsyncStorage.setItem(userEmail, userPassword, (err, res) => {
             Alert.alert('You have registered successfully !');
             setLoading(false);
             props.navigation.navigate('login');
-        })
+            return
+
+        }).catch((err) => console.log('error occurred during list Of Users', err))
+
         setLoading(false);
-        console.log(res);
     };
 
     return (
