@@ -33,7 +33,7 @@ function postReducer(state = initialState, action) {
                         body: action.payload.body,
                         authorId: action.payload.authorId,
                         date: action.payload.date,
-                        likes: [...likes, action.payload.likes],
+                        likes: action.payload.likes,
                     } : content)
             };
         case types.DELETE_POST:

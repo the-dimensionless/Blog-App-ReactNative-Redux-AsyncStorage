@@ -18,6 +18,8 @@ const EditPostScreen = (props) => {
             if (user["id"] === local.authorId) {
                 setCanEdit(true)
             }
+            console.log('author id is ', local.authorId)
+            console.log('user id is ', user["id"])
         })
 
     }, []);
@@ -47,10 +49,10 @@ const EditPostScreen = (props) => {
             body: body,
             date: new Date().toDateString(),
             authorId: local.authorId,
-            likes: likes
+            likes: likelist
         }
 
-        console.log('New value for slug is ', p.slug);
+        console.log('New value for likes is ', p.likes);
         props.editPost(p);
         console.log('Sent for updation');
         props.navigation.navigate('Home');

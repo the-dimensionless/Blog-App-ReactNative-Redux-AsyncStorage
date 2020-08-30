@@ -7,11 +7,13 @@ import { currentUser } from './Util';
 
 const AddPostScreen = (props) => {
 
-    let authorId = 0
     useEffect(() => {
         currentUser().then((res) => {
             user = JSON.parse(res)
-            authorId = user["id"]
+            setAuthorId(user["id"])
+
+            console.log(user["id"], ' id is creating files')
+            console.log(authorId, ' id is creating files')
         })
     }, [])
 
@@ -19,6 +21,8 @@ const AddPostScreen = (props) => {
     let [postTitle, setPostTitle] = useState('');
     let [postSlug, setPostSlug] = useState('');
     let [postBody, setPostBody] = useState('');
+
+    let [authorId, setAuthorId] = useState(0)
 
 
     function submitForm() {
@@ -28,7 +32,7 @@ const AddPostScreen = (props) => {
             slug: postSlug,
             body: postBody,
             date: new Date().toDateString(),
-            authorId: 1,
+            authorId: authorId,
             likes: []
         }
 
