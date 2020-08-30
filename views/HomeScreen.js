@@ -19,10 +19,6 @@ const HomeScreen = (props) => {
                         }} />
                     </View>
                 </View>
-
-
-
-
                 <PostsList props={props} />
             </View>
         </View>

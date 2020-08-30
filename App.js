@@ -42,7 +42,8 @@ export default function App() {
       headerTitleStyle: {
         fontWeight: 'bold'
       }
-    }} initialRouteName={nav === 'true' ? "Home" : "login"}>
+    }} initialRouteName="login" //initialRouteName={nav === 'true' ? "Home" : "login"}
+    >
       <authStack.Screen name="login" component={LoginScreen} options={{
         title: 'Login to continue'
       }} />
@@ -61,7 +62,7 @@ export default function App() {
       <authStack.Screen name="edit" component={EditPostScreen} options={{
         title: 'Edit Post'
       }} />
-    </authStack.Navigator>
+    </authStack.Navigator >
   )
 
   return (
