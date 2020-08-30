@@ -19,10 +19,10 @@ const EditPostScreen = (props) => {
 
     const [title, setTitle] = useState(local.title);
     const [slug, setSlug] = useState(local.slug);
-    const [body, setBody] = useState('');
+    const [body, setBody] = useState(local.body);
     const [date, setDate] = useState(local.date);
 
-    const [likes, setLikes] = useState('');
+    const [likes, setLikes] = useState(local.likes.length);
 
     const [view, setView] = useState(true);
 
@@ -80,7 +80,7 @@ const EditPostScreen = (props) => {
                             style={styles.image}
                             source={require('../assets/like.png')}
                         />
-                        <Text title='5' style={styles.likes} />
+                        <Text title='5' style={styles.likes} > {likes} </Text>
                     </View>
 
                     <View style={styles.button}>
@@ -141,7 +141,9 @@ const styles = StyleSheet.create({
     },
 
     likes: {
-
+        padding: 5,
+        fontSize: 15,
+        marginLeft: 25
     },
 
     image: {
