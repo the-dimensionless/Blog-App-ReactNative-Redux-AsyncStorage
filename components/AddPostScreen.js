@@ -3,14 +3,23 @@ import { View, TextInput, Text, Button, StyleSheet, TouchableOpacity } from 'rea
 import { connect } from 'react-redux';
 
 import { createPost } from '../redux/actions/postActions';
+import { currentUser } from './Util';
 
 const AddPostScreen = (props) => {
+
+    let authorId = 0
+    useEffect(() => {
+        currentUser().then((res) => {
+            user = JSON.parse(res)
+            authorId = user["id"]
+        })
+    }, [])
+
     let [postId, setPostId] = useState(Math.max.apply(Math, props.posts.map(function (o) { return o["id"]; })) + 1);
     let [postTitle, setPostTitle] = useState('');
     let [postSlug, setPostSlug] = useState('');
     let [postBody, setPostBody] = useState('');
 
-    const authorId = 1;
 
     function submitForm() {
         const post = {
