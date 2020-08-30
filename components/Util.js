@@ -20,9 +20,12 @@ export const logoutUser = async () => {
     return;
 }
 
-export const currentUser = () => {
-    AsyncStorage.getItem('currentItem').then((res) => {
-        user = JSON.parse(res)
-        return user
+export const currentUser = async () => {
+    let obj = {}
+    await AsyncStorage.getItem('currentUser').then((res) => {
+        //console.log(res)
+        obj = res
+        return res
     }).catch((err) => console.log('error fetching current user details'))
+    return obj
 }

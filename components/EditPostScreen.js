@@ -1,18 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { View, Button, Text, TextInput, Image, StyleSheet } from 'react-native';
+import { View, Button, Text, TextInput, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { editPost, deletePost } from '../redux/actions/postActions';
+import { currentUser } from './Util';
 
 let uid;
+let user;
 const EditPostScreen = (props) => {
 
     //let local = props.posts[0];
     let local = props.route.params
     useEffect(() => {
         local = props.route.params
+
+        currentUser().then((res) => {
+            user = JSON.parse(res)
+            if (user["id"] === local.authorId) {
+                setCanEdit(true)
+            }
+        })
+
     }, []);
 
-    let [canEdit, setCanEdit] = useState(true);
+    let [canEdit, setCanEdit] = useState(false);
 
     const [title, setTitle] = useState(local.title);
     const [slug, setSlug] = useState(local.slug);
@@ -20,6 +30,7 @@ const EditPostScreen = (props) => {
     const [date, setDate] = useState(local.date);
 
     const [likes, setLikes] = useState(local.likes.length);
+    const [likelist, setLikeList] = useState(local.likes);
 
     const [view, setView] = useState(true);
 
@@ -51,6 +62,17 @@ const EditPostScreen = (props) => {
         props.navigation.navigate('Home');
     }
 
+    function toggleLike() {
+        if (likelist.includes(user["id"])) {
+            setLikeList(likelist.filter((id) => {
+                return id !== user["id"]
+            }))
+            setLikes(likes - 1)
+        } else {
+            setLikeList([...likelist, user["id"]])
+            setLikes(likes + 1)
+        }
+    }
 
     return (
         <>
@@ -74,10 +96,12 @@ const EditPostScreen = (props) => {
             <View style={styles.actionCard}>
                 <View style={styles.actions} >
                     <View style={styles.button}>
-                        <Image
-                            style={styles.image}
-                            source={require('../assets/like.png')}
-                        />
+                        <TouchableOpacity onPress={() => toggleLike()}>
+                            <Image
+                                style={styles.image}
+                                source={require('../assets/like.png')}
+                            />
+                        </TouchableOpacity>
                         <Text title='5' style={styles.likes} > {likes} </Text>
                     </View>
 
