@@ -15,38 +15,6 @@ import RegisterScreen from './components/RegisterScreen';
 import { Provider } from 'react-redux';
 import store from './redux/configureStore';
 
-const authStack = createStackNavigator();
-const AuthStack = (props) => (
-  <authStack.Navigator screenOptions={{
-    headerStyle: {
-      backgroundColor: '#009387'
-    },
-    headerTintColor: 'white',
-    headerTitleStyle: {
-      fontWeight: 'bold'
-    }
-  }} initialRouteName="login">
-    <authStack.Screen name="login" component={LoginScreen} options={{
-      title: 'Login to continue'
-    }} />
-    <authStack.Screen name="register" component={RegisterScreen} options={{
-      title: 'Register to continue'
-    }} />
-
-    <authStack.Screen name="Home" component={HomeScreen} options={{
-      title: 'Welcome'
-    }, { headerLeft: null }} />
-
-    <authStack.Screen name="add" component={AddPostScreen} options={{
-      title: 'Add Post'
-    }} />
-
-    <authStack.Screen name="edit" component={EditPostScreen} options={{
-      title: 'Edit Post'
-    }} />
-  </authStack.Navigator>
-)
-
 export default function App() {
 
   let [nav, setNav] = useState('dummy')
@@ -61,8 +29,40 @@ export default function App() {
   useEffect(() => {
     console.log('data value read is ', nav);
     value = isAuth();
-    console.log('after function call value is ', nav);
+    console.log('after function call value is ', value);
   })
+
+  const authStack = createStackNavigator();
+  const AuthStack = (props) => (
+    <authStack.Navigator screenOptions={{
+      headerStyle: {
+        backgroundColor: '#009387'
+      },
+      headerTintColor: 'white',
+      headerTitleStyle: {
+        fontWeight: 'bold'
+      }
+    }} initialRouteName={nav === 'true' ? "Home" : "login"}>
+      <authStack.Screen name="login" component={LoginScreen} options={{
+        title: 'Login to continue'
+      }} />
+      <authStack.Screen name="register" component={RegisterScreen} options={{
+        title: 'Register to continue'
+      }} />
+
+      <authStack.Screen name="Home" component={HomeScreen} options={{
+        title: 'Welcome'
+      }, { headerLeft: null }} />
+
+      <authStack.Screen name="add" component={AddPostScreen} options={{
+        title: 'Add Post'
+      }} />
+
+      <authStack.Screen name="edit" component={EditPostScreen} options={{
+        title: 'Edit Post'
+      }} />
+    </authStack.Navigator>
+  )
 
   return (
     <Provider store={store()}>
