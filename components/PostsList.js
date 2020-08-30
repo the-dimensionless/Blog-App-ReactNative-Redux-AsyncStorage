@@ -29,13 +29,13 @@ const PostsList = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 20,
+        marginBottom: 10,
     },
     container2: {
         flex: 1,
         flexDirection: "row",
         flexWrap: "wrap",
-        marginBottom: 35
+        marginBottom: 5
     }
 });
 

@@ -30,9 +30,10 @@ function postReducer(state = initialState, action) {
                         ...content,
                         title: action.payload.title,
                         slug: action.payload.slug,
-
+                        body: action.payload.body,
                         authorId: action.payload.authorId,
-                        date: action.payload.date
+                        date: action.payload.date,
+                        likes: [...likes, action.payload.likes],
                     } : content)
             };
         case types.DELETE_POST:

@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, TextInput, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
 import { createPost } from '../redux/actions/postActions';
 
 const AddPostScreen = (props) => {
-
-    let [postId, setPostId] = useState('');
+    let [postId, setPostId] = useState(Math.max.apply(Math, props.posts.map(function (o) { return o["id"]; })) + 1);
     let [postTitle, setPostTitle] = useState('');
     let [postSlug, setPostSlug] = useState('');
     let [postBody, setPostBody] = useState('');
 
-    const postDate = '';
     const authorId = 1;
 
     function submitForm() {
@@ -22,6 +20,7 @@ const AddPostScreen = (props) => {
             body: postBody,
             date: new Date().toDateString(),
             authorId: 1,
+            likes: []
         }
 
         props.createPost(post);
@@ -104,7 +103,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
     return {
-        posts: state.posts
+        posts: state.postReducer.posts,
     };
 }
 

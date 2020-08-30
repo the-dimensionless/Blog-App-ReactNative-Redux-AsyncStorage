@@ -43,9 +43,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#90ee90',
         shadowOpacity: 25,
         borderRadius: 13,
-        height: '50%',
-
-
+        height: 270,
     },
 
     title: {

@@ -9,10 +9,7 @@ const EditPostScreen = (props) => {
     //let local = props.posts[0];
     let local = props.route.params
     useEffect(() => {
-        /* console.log(props); */
         local = props.route.params
-        /* console.log('Id of post recievd', local.id); */
-
     }, []);
 
     let [canEdit, setCanEdit] = useState(true);
@@ -36,9 +33,10 @@ const EditPostScreen = (props) => {
             id: local.id,
             title: title,
             slug: slug,
-            body: local.bug,
+            body: body,
             date: new Date().toDateString(),
-            authorId: local.authorId
+            authorId: local.authorId,
+            likes: likes
         }
 
         console.log('New value for slug is ', p.slug);
@@ -136,7 +134,7 @@ const styles = StyleSheet.create({
 
     date: {
         paddingTop: 7,
-        color: 'white',
+        color: 'grey',
         alignContent: 'flex-end'
     },
 
@@ -147,9 +145,9 @@ const styles = StyleSheet.create({
     },
 
     image: {
-        width: 50,
-        height: 50,
-        marginLeft: 8
+        width: 40,
+        height: 40,
+        marginLeft: 19
     },
 
     body: {
@@ -168,7 +166,7 @@ const styles = StyleSheet.create({
     button: {
         width: '20%',
         padding: 5,
-        marginLeft: 4
+        marginLeft: 3
     }
 
 
