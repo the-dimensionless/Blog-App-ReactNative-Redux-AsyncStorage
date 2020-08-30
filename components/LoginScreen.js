@@ -4,8 +4,8 @@ import {
     KeyboardAvoidingView, AsyncStorage, Alert
 } from 'react-native';
 
-import { NavigationActions } from '@react-navigation/native';
 import Loader from './Loader';
+import { isAuth, currentUser } from './Util';
 import appContext from './context/appContext';
 
 const LoginScreen = (props) => {
@@ -18,11 +18,14 @@ const LoginScreen = (props) => {
     const _emailinput = useRef('');
     const _passwordinput = useRef('');
 
-    const { isLoggedIn, toggleLogin } = useContext(appContext);
-
     useEffect(() => {
         console.log('-------login Screen-------')
-        console.log(isLoggedIn);
+        isAuth().then((res) => {
+            console.log('Has anyone logged in ? ', res)
+            if (res === 'true') {
+                props.navigation.navigate('Home')
+            }
+        }).catch((err) => console.log('error checking login', err))
     }, [])
 
     const handleLogin = () => {
@@ -35,42 +38,91 @@ const LoginScreen = (props) => {
             return;
         }
         setLoading(true);
-        AsyncStorage.getItem(userEmail, (err, res) => {
+        AsyncStorage.getItem('listOfUsers').then((res) => {
             setLoading(false);
-            console.log(err, res);
+            //console.log('trying to find user Id')
             if (res) {
-                if (res !== userPassword) {
+                let flag = -1
+                let user = null
+                let l = JSON.parse(res)
+                l.forEach(element => {
+                    if (element["email"] === userEmail) {
+                        user = element
+                        flag = 0
+                    }
+                });
+                if (flag === -1) {
+                    Alert.alert(`No account for ${userEmail}`);
+                    setInfo('No such email found');
+                    return
+                }
+                if (user["password"] !== userPassword) {
                     Alert.alert('Password incorrect');
                     setInfo('wrong password');
+                    return
                 } else {
                     AsyncStorage.setItem('userLoggedIn', 'true', (err, res) => {
-                        //Alert.alert(`${userEmail} Logging in`);
-
-                        let user = {
-                            email: userEmail,
-                            password: userPassword,
-                            id: 1
-                        }
-
-                        AsyncStorage.setItem('user', JSON.stringify(user), (err, res) => {
+                        AsyncStorage.setItem('currentUser', JSON.stringify(user), (err, res) => {
                             Alert.alert(`${userEmail} Logging in`);
-
                             props.navigation.navigate('Home');
-
-                            //props.navigation.goBack();
-                            //props.navigation.navigate('drawer');
                             return;
                         })
                     })
                 }
 
             } else {
-                Alert.alert(`No account for ${userEmail}`);
-                setInfo('No such email found');
+                Alert.alert('Some error with storage space, could not load userList');
             }
         })
     }
 
+
+    /*  const handleLogin = () => {
+         if (!userEmail) {
+             Alert.alert('email id cannot be empty');
+             return;
+         }
+         if (!userPassword) {
+             Alert.alert('password cannot be empty');
+             return;
+         }
+         setLoading(true);
+         AsyncStorage.getItem(userEmail, (err, res) => {
+             setLoading(false);
+             console.log(err, res);
+             if (res) {
+                 if (res !== userPassword) {
+                     Alert.alert('Password incorrect');
+                     setInfo('wrong password');
+                 } else {
+                     AsyncStorage.setItem('userLoggedIn', 'true', (err, res) => {
+                         //Alert.alert(`${userEmail} Logging in`);
+ 
+                         let user = {
+                             email: userEmail,
+                             password: userPassword,
+                             id: 1
+                         }
+ 
+                         AsyncStorage.setItem('user', JSON.stringify(user), (err, res) => {
+                             Alert.alert(`${userEmail} Logging in`);
+ 
+                             props.navigation.navigate('Home');
+ 
+                             //props.navigation.goBack();
+                             //props.navigation.navigate('drawer');
+                             return;
+                         })
+                     })
+                 }
+ 
+             } else {
+                 Alert.alert(`No account for ${userEmail}`);
+                 setInfo('No such email found');
+             }
+         })
+     }
+  */
 
     return (
         <View style={StyleSheet.mainBody}>
