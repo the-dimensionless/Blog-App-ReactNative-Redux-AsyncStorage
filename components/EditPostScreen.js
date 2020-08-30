@@ -65,7 +65,7 @@ const EditPostScreen = (props) => {
                     <TextInput style={styles.slug} defaultValue={slug} editable={canEdit} onChangeText={
                         (text) => setSlug(text)} />
 
-                    <TextInput multiline={true} style={styles.body} defaultValue='Here will be Body AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' editable={canEdit} onChangeText={
+                    <TextInput multiline={true} style={styles.body} value={body} editable={canEdit} onChangeText={
                         (text) => setBody(text)
                     } />
 
