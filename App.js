@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import HomeScreen from './views/HomeScreen';
 import EditPostScreen from './components/EditPostScreen';
@@ -15,21 +14,36 @@ import RegisterScreen from './components/RegisterScreen';
 import { Provider } from 'react-redux';
 import store from './redux/configureStore';
 
+import appContext from './components/context/appContext';
+
 export default function App() {
 
   let [nav, setNav] = useState('dummy')
   let isAuth = async () => {
     await AsyncStorage.getItem('isLoggedIn').then((res) => {
-      console.log('data value is', res);
       setNav(res)
+      if (res) {
+        console.log('something', res)
+        // toggleLogin();
+        console.log(isLoggedIn, ' is new value')
+      } else {
+        console.log('nothing inside')
+      }
       return res;
     }).catch((err) => console.log(err))
   }
 
+
+  const setLog = () => AsyncStorage.setItem('isLoggedIn', 'true');
+
+  const { isLoggedIn, toggleLogin } = useContext(appContext);
+
   useEffect(() => {
-    console.log('data value read is ', nav);
-    value = isAuth();
-    console.log('after function call value is ', value);
+    //setLog()
+    console.log('----------------')
+    console.log('is logged in ? ', isLoggedIn);
+    isAuth();
+    console.log('after function call value is ', isLoggedIn);
   })
 
   const authStack = createStackNavigator();
@@ -67,9 +81,11 @@ export default function App() {
 
   return (
     <Provider store={store()}>
-      <NavigationContainer>
-        <AuthStack />
-      </NavigationContainer>
+      <appContext.Provider value={isLoggedIn, toggleLogin}>
+        <NavigationContainer>
+          <AuthStack />
+        </NavigationContainer>
+      </appContext.Provider>
     </Provider>
   );
 }

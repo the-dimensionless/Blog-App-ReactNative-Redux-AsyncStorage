@@ -7,7 +7,7 @@ export default {
             "body": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
             "authorId": 1,
             "date": "8/23/2020",
-            "likes": []
+            "likes": [1, 2, 3]
         },
         {
             "id": 2,
@@ -16,7 +16,7 @@ export default {
             "body": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
             "authorId": 1,
             "date": "8/20/2020",
-            "likes": []
+            "likes": [1, 2]
         },
         {
             "id": 3,
@@ -25,7 +25,7 @@ export default {
             "body": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
             "authorId": 1,
             "date": "8/21/2020",
-            "likes": []
+            "likes": [1]
         },
         {
             "id": 4,
@@ -34,7 +34,7 @@ export default {
             "body": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
             "authorId": 2,
             "date": "8/22/2020",
-            "likes": []
+            "likes": [1, 2, 3]
         },
         {
             "id": 5,

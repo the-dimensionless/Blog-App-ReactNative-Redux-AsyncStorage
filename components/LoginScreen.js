@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import {
     StyleSheet, Text, View, TextInput, ScrollView, Image, Keyboard, TouchableOpacity,
     KeyboardAvoidingView, AsyncStorage, Alert
@@ -6,6 +6,7 @@ import {
 
 import { NavigationActions } from '@react-navigation/native';
 import Loader from './Loader';
+import appContext from './context/appContext';
 
 const LoginScreen = (props) => {
     let [userEmail, setUserEmail] = useState('');
@@ -16,6 +17,13 @@ const LoginScreen = (props) => {
 
     const _emailinput = useRef('');
     const _passwordinput = useRef('');
+
+    const { isLoggedIn, toggleLogin } = useContext(appContext);
+
+    useEffect(() => {
+        console.log('-------login Screen-------')
+        console.log(isLoggedIn);
+    }, [])
 
     const handleLogin = () => {
         if (!userEmail) {
@@ -36,7 +44,7 @@ const LoginScreen = (props) => {
                     setInfo('wrong password');
                 } else {
                     AsyncStorage.setItem('userLoggedIn', 'true', (err, res) => {
-                        Alert.alert(`${userEmail} Logging in`);
+                        //Alert.alert(`${userEmail} Logging in`);
 
                         let user = {
                             email: userEmail,
@@ -44,7 +52,7 @@ const LoginScreen = (props) => {
                             id: 1
                         }
 
-                        AsyncStorage.setItem('user', user, (err, res) => {
+                        AsyncStorage.setItem('user', JSON.stringify(user), (err, res) => {
                             Alert.alert(`${userEmail} Logging in`);
 
                             props.navigation.navigate('Home');
