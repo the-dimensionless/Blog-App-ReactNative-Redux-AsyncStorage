@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
 import PostsList from '../components/PostsList';
+import { loadDummy } from '../components/Util';
 
 const HomeScreen = (props) => {
     return (

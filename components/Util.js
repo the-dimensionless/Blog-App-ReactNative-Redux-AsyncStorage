@@ -1,8 +1,5 @@
 import { AsyncStorage } from "react-native";
-
-export function getHash(email) {
-
-}
+import Data from './../assets/data/data.json';
 
 export const isAuth = async () => {
     let rt = ''
@@ -28,4 +25,38 @@ export const currentUser = async () => {
         return res
     }).catch((err) => console.log('error fetching current user details'))
     return obj
+}
+
+export const loadDummy = async () => {
+    let d = []
+    await AsyncStorage.getItem('dummyData').then((res) => {
+        list = JSON.parse(res)
+        if (list) {
+            //console.log('to return ', list)
+            return list
+        }
+        return d;
+    })
+    return d
+}
+
+export const setDummy = async (data) => {
+    await AsyncStorage.setItem('dummyData', data)
+}
+
+export function helpLoadData() {
+    let myData = Data
+    loadDummy().then((res) => {
+        console.log("data by helper function ", res)
+        myData = [...res]
+        if (res.length === 0) {
+            readytobe = JSON.stringify(Data)
+            console.log('Reinitiazing data')
+            setDummy(readytobe)
+            return myData
+        } else {
+            return res
+        }
+    }).catch((err) => console.log('error', err))
+    return myData
 }
