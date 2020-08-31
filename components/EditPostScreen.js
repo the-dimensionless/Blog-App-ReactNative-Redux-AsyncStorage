@@ -1,27 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { View, Button, Text, TextInput, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { editPost, deletePost } from '../redux/actions/postActions';
+import { editPost, deletePost, likePost } from '../redux/actions/postActions';
 import { currentUser } from './Util';
 
 let uid;
 let user;
 const EditPostScreen = (props) => {
-
-    //let local = props.posts[0];
     let local = props.route.params
     useEffect(() => {
         local = props.route.params
-
         currentUser().then((res) => {
             user = JSON.parse(res)
             if (user["id"] === local.authorId) {
                 setCanEdit(true)
             }
-            console.log('author id is ', local.authorId)
-            console.log('user id is ', user["id"])
         })
-
     }, []);
 
     let [canEdit, setCanEdit] = useState(false);
@@ -52,28 +46,40 @@ const EditPostScreen = (props) => {
             likes: likelist
         }
 
-        console.log('New value for likes is ', p.likes);
         props.editPost(p);
-        console.log('Sent for updation');
+        // console.log('Sent for updation');
         props.navigation.navigate('Home');
     }
 
     function doDelete() {
         props.deletePost(local.id);
-        console.log('Sent for deletion');
+        //console.log('Sent for deletion');
         props.navigation.navigate('Home');
     }
 
     function toggleLike() {
+
+        let localList = likelist
+        console.log('before ', localList)
+
         if (likelist.includes(user["id"])) {
-            setLikeList(likelist.filter((id) => {
+            localList = likelist.filter((id) => {
                 return id !== user["id"]
-            }))
+            })
+            console.log('fter removing localList is ', localList)
+
+            setLikeList(localList)
             setLikes(likes - 1)
         } else {
-            setLikeList([...likelist, user["id"]])
+
+            localList = [...likelist, user["id"]]
+            setLikeList(localList)
+            console.log('after  adding localList is ', localList)
             setLikes(likes + 1)
         }
+        console.log('after ', likelist)
+        props.likePost(local.id, localList);
+
     }
 
     return (
@@ -194,9 +200,6 @@ const styles = StyleSheet.create({
         padding: 5,
         marginLeft: 3
     }
-
-
-
 });
 
 function mapStateToProps(state) {
@@ -208,4 +211,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, { editPost, deletePost })(EditPostScreen);
+export default connect(mapStateToProps, { editPost, deletePost, likePost })(EditPostScreen);

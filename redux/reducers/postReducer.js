@@ -44,11 +44,11 @@ function postReducer(state = initialState, action) {
         case types.LIKE_POSTS:
             return {
                 ...state,
-                posts: state.map(
-                    (content, i) => content.id === action.payload.id ?
+                posts: state.posts.map(
+                    (content, i) => content.id === action.postId ?
                         {
                             ...content,
-                            likes: likes + 1
+                            likes: action.likes
                         } : content
                 )
             };

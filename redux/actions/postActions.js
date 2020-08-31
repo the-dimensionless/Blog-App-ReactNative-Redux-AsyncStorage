@@ -1,6 +1,4 @@
 import * as types from './actionTypes';
-import Data from '../../assets/data/data.json';
-import { AsyncStorage } from 'react-native';
 import { loadDummy, setDummy } from '../../components/Util';
 
 export function loadPosts() {
@@ -47,11 +45,15 @@ export function deletePost(postId) {
     }
 };
 
-export function likePost(postId, userId) {
-    return {
-        type: types.LIKE_POSTS,
-        postId: postId,
-        userId: userId
+export function likePost(postId, likes) {
+    return dispatch => {
+        // Mock API Calls/persist changes
+        persistLikes(postId, likes)
+        return dispatch({
+            type: types.LIKE_POSTS,
+            postId: postId,
+            likes: likes
+        })
     }
 }
 
@@ -69,6 +71,7 @@ function persistUpdation(post) {
     let localList = []
     loadDummy().then((res) => {
         localList = res
+        console.log('updation has ', localList)
     }).catch((err) => console.log('error while persisting update post', err))
 
     if (localList !== []) {
@@ -94,6 +97,22 @@ function persistDeletion(postId) {
 
     localList.filter((p) => {
         return p["id"] !== postId
+    })
+
+    setDummy(JSON.stringify(localList));
+}
+
+function persistLikes(postId, likes) {
+    let localList = []
+    loadDummy().then((res) => {
+        localList = res
+        console.log('persist like fetched ', localList);
+    }).catch((err) => console.log('error while persisting update post', err))
+
+    localList.forEach((p) => {
+        if (p["id"] === postId) {
+            p["likes"] = likes
+        }
     })
 
     setDummy(JSON.stringify(localList));
